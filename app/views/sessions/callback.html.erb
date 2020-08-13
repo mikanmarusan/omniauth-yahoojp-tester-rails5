@@ -1,0 +1,47 @@
+<div id="user">
+  <p>Hello, <%= @nickname %> さん</p>
+  <div id="response">
+ Response:
+ <ul>
+   <li><%= @extra %></li>
+ </ul>
+  </div>
+  <div id="credentials">
+ Credentials:
+ <ul>
+   <li>access_token: <%= @token %></li>
+   <li>refresh_token: <%= @refresh_token %></li>
+   <li>expires_at: <%= @expires_at %></li>
+ </ul>
+  </div>
+  <div id="userinfo">
+ UserInfo: <%= @uid %>
+ <ul>
+   <li>sub: <%= @sub %></li>
+   <li>name: <%= @name %></li>
+   <li>given_name: <%= @given_name %></li>
+   <li>given_name_ja_kana_jp: <%= @given_name_ja_kana_jp %></li>
+   <li>given_name_ja_hani_jp: <%= @given_name_ja_hani_jp %></li>
+   <li>family_name: <%= @family_name %></li>
+   <li>family_name_ja_kana_jp: <%= @family_name_ja_kana_jp %></li>
+   <li>family_name_ja_hani_jp: <%= @family_name_ja_hani_jp %></li>
+   <li>gender: <%= @gender %></li>
+   <li>zoneinfo: <%= @zoneinfo %></li>
+   <li>locale: <%= @locale %></li>
+   <li>birthdate: <%= @birthdate %></li>
+   <li>nickname: <%= @nickname %></li>
+   <li>picture: <%= @picture %></li>
+   <li>email: <%= @email %></li>
+   <li>email_verified: <%= @email_verified %></li>
+   <li>address
+      <ul>
+         <li>country: <%= @address['country'] %></li>
+         <li>postal_code: <%= @address['postal_code'] %></li>
+         <li>region: <%= @address['region'] %></li>
+         <li>locality: <%= @address['locality'] %></li>
+         <li>formatted: <%= @address['formatted'] %></li>
+      </ul>
+   </li>
+ </ul>
+  </div>
+</div>
