@@ -16,6 +16,7 @@ services:
 
   mysql:
     image: mysql:5.7.31
+    platform: linux/x86_64
     container_name: mysql
     volumes:
       - ./tmp/mysql:/var/lib/mysql
