@@ -62,7 +62,7 @@ YAHOOJP_SECRET={Your YConnect Secret}
 
 ## Upstream Gem Dependency
 
-This app is a downstream consumer of the `omniauth-yahoojp` gem (source: `../omniauth-yahoojp`).
+This app is a downstream consumer of the `omniauth-yahoojp` gem ([GitHub](https://github.com/mikanmarusan/omniauth-yahoojp)).
 
 ### Gem API Surface Used
 
