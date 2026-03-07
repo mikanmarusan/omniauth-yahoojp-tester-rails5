@@ -60,6 +60,34 @@ YAHOOJP_SECRET={Your YConnect Secret}
 - **OmniAuth gems**: `omniauth`, `omniauth-oauth2`, `omniauth-yahoojp`
 - **Containerized** with Docker Compose
 
+## Upstream Gem Dependency
+
+This app is a downstream consumer of the `omniauth-yahoojp` gem (source: `../omniauth-yahoojp`).
+
+### Gem API Surface Used
+
+**Provider config** (`config/initializers/omniauth.rb`):
+- `provider :yahoojp` with options: `scope`
+
+**Auth hash consumed** (`app/controllers/sessions_controller.rb`, `app/views/sessions/callback.html.erb`):
+- `auth.uid`
+- `auth.info`: sub, name, given_name, family_name, gender, zoneinfo, locale, birthdate, nickname, picture, email, email_verified, plus Japanese name variants (given_name_ja_kana_jp, given_name_ja_hani_jp, family_name_ja_kana_jp, family_name_ja_hani_jp)
+- `auth.info.address`: country, postal_code, region, locality, formatted
+- `auth.credentials`: token, refresh_token, expires_at
+- `auth.extra`
+
+### Cross-Project Update Rules
+
+When `omniauth-yahoojp` changes its API:
+1. **New provider options** (e.g., `userinfo_access`) -> update `config/initializers/omniauth.rb`
+2. **New/changed auth hash fields** -> update controller and view to display them
+3. **Removed or renamed fields** -> update controller and view to remove/rename references
+4. **Gem version bump** -> update `Gemfile`
+
+### Git Operations
+
+This sample app has its own Git repository. All Git operations (branch, commit, push, PR) for this app must be performed in this repository (`omniauth-yahoojp-tester-rails5`), NOT in the upstream gem repository (`omniauth-yahoojp`).
+
 ## Development Notes
 
 - Application runs on port 3000 via Docker Compose
