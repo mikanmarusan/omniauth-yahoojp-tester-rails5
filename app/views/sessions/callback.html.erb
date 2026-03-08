@@ -14,6 +14,23 @@
    <li>expires_at: <%= @expires_at %></li>
  </ul>
   </div>
+  <% if @id_token %>
+  <div id="id_token">
+ ID Token:
+ <ul>
+   <li>id_token: <%= @id_token %></li>
+   <% if @id_token_claims %>
+   <li>id_token_claims:
+     <ul>
+       <% @id_token_claims.each do |key, value| %>
+         <li><%= key %>: <%= value %></li>
+       <% end %>
+     </ul>
+   </li>
+   <% end %>
+ </ul>
+  </div>
+  <% end %>
   <div id="userinfo">
  UserInfo: <%= @uid %>
  <ul>
@@ -35,11 +52,15 @@
    <li>email_verified: <%= @email_verified %></li>
    <li>address
       <ul>
+         <% if @address %>
          <li>country: <%= @address['country'] %></li>
          <li>postal_code: <%= @address['postal_code'] %></li>
          <li>region: <%= @address['region'] %></li>
          <li>locality: <%= @address['locality'] %></li>
          <li>formatted: <%= @address['formatted'] %></li>
+         <% else %>
+         <li>(not available)</li>
+         <% end %>
       </ul>
    </li>
  </ul>
