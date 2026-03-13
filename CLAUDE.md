@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Application Overview
 
-This is a Rails 5 demonstration application for testing OAuth authentication with Yahoo Japan's YConnect service using the `omniauth-yahoojp` gem. The app provides a complete OAuth flow example, from login initiation to displaying user information retrieved from Yahoo Japan.
+This is a Rails 7 demonstration application for testing OAuth authentication with Yahoo Japan's YConnect service using the `omniauth-yahoojp` gem. The app provides a complete OAuth flow example, from login initiation to displaying user information retrieved from Yahoo Japan.
 
 ## Development Commands
 
@@ -17,23 +17,23 @@ docker-compose build
 docker-compose up
 
 # Run Rails commands inside container
-docker-compose exec web rails console
-docker-compose exec web rails test
-docker-compose exec web bundle exec rails test:system
+docker-compose exec rails rails console
+docker-compose exec rails rails test
+docker-compose exec rails bundle exec rails test:system
 ```
 
 ### Database Commands
 ```bash
 # Database operations (inside container)
-docker-compose exec web rails db:create
-docker-compose exec web rails db:migrate
+docker-compose exec rails rails db:create
+docker-compose exec rails rails db:migrate
 ```
 
 ### Testing
 - **Framework**: Rails default (Minitest)
 - **System tests**: Capybara + Selenium WebDriver
-- **Run tests**: `docker-compose exec web rails test`
-- **System tests**: `docker-compose exec web bundle exec rails test:system`
+- **Run tests**: `docker-compose exec rails rails test`
+- **System tests**: `docker-compose exec rails bundle exec rails test:system`
 
 ## Application Architecture
 
@@ -55,8 +55,8 @@ YAHOOJP_SECRET={Your YConnect Secret}
 ```
 
 ### Dependencies
-- **Rails 5.2.4.3** with Ruby 2.7.1
-- **MySQL 5.7.31** database
+- **Rails 7.1+** with Ruby 3.3
+- **MySQL 8.0** database
 - **OmniAuth gems**: `omniauth`, `omniauth-oauth2`, `omniauth-yahoojp`
 - **Containerized** with Docker Compose
 
@@ -67,14 +67,14 @@ This app is a downstream consumer of the `omniauth-yahoojp` gem ([GitHub](https:
 ### Gem API Surface Used
 
 **Provider config** (`config/initializers/omniauth.rb`):
-- `provider :yahoojp` with options: `scope`
+- `provider :yahoojp` with options: `scope`, `userinfo_access`
 
 **Auth hash consumed** (`app/controllers/sessions_controller.rb`, `app/views/sessions/callback.html.erb`):
 - `auth.uid`
 - `auth.info`: sub, name, given_name, family_name, gender, zoneinfo, locale, birthdate, nickname, picture, email, email_verified, plus Japanese name variants (given_name_ja_kana_jp, given_name_ja_hani_jp, family_name_ja_kana_jp, family_name_ja_hani_jp)
 - `auth.info.address`: country, postal_code, region, locality, formatted
-- `auth.credentials`: token, refresh_token, expires_at
-- `auth.extra`
+- `auth.credentials`: token, refresh_token, expires_at, id_token
+- `auth.extra`, `auth.extra.id_token_claims`
 
 ### Cross-Project Update Rules
 
@@ -86,7 +86,7 @@ When `omniauth-yahoojp` changes its API:
 
 ### Git Operations
 
-This sample app has its own Git repository. All Git operations (branch, commit, push, PR) for this app must be performed in this repository (`omniauth-yahoojp-tester-rails5`), NOT in the upstream gem repository (`omniauth-yahoojp`).
+This sample app has its own Git repository. All Git operations (branch, commit, push, PR) for this app must be performed in this repository (`omniauth-yahoojp-tester-containers`), NOT in the upstream gem repository (`omniauth-yahoojp`).
 
 ## Development Notes
 

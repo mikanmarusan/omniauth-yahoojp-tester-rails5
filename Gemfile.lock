@@ -216,7 +216,7 @@ GEM
     omniauth-oauth2 (1.9.0)
       oauth2 (>= 2.0.2, < 3)
       omniauth (~> 2.0)
-    omniauth-yahoojp (1.0.0)
+    omniauth-yahoojp (1.0.1)
       httpauth
       json-jwt (>= 1.16.6)
       omniauth (>= 1.0)
@@ -448,7 +448,7 @@ CHECKSUMS
   oauth2 (2.0.18) sha256=bacf11e470dfb963f17348666d0a75c7b29ca65bc48fd47be9057cf91a403287
   omniauth (2.1.4) sha256=42a05b0496f0d22e1dd85d42aaf602f064e36bb47a6826a27ab55e5ba608763c
   omniauth-oauth2 (1.9.0) sha256=ed15f6d9d20991807ce114cc5b9c1453bce3645b64e51c68c90cff5ff153fee8
-  omniauth-yahoojp (1.0.0) sha256=3bb3170171de727f1b53be9837f392a912754ace6d45c5ad6b591698ca0e654d
+  omniauth-yahoojp (1.0.1) sha256=2d4e4de9261c7f870656c39e563f85bd43ed5f233e925f8312124347f8e09d7d
   pp (0.6.3) sha256=2951d514450b93ccfeb1df7d021cae0da16e0a7f95ee1e2273719669d0ab9df6
   prettyprint (0.2.0) sha256=2bc9e15581a94742064a3cc8b0fb9d45aae3d03a1baa6ef80922627a0766f193
   prism (1.9.0) sha256=7b530c6a9f92c24300014919c9dcbc055bf4cdf51ec30aed099b06cd6674ef85
