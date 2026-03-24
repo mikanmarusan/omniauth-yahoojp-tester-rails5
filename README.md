@@ -1,35 +1,59 @@
-# omniauth-yahoojp-tester-rails5
+# omniauth-yahoojp-tester-containers
 
-This is the 'omniauth-yahoojp' sample Rails5 application that work on the docker container. See Also [omniauth-yahoojp](https://github.com/mikanmarusan/omniauth-yahoojp/)
+A demonstration Rails application for testing OAuth authentication with Yahoo Japan's YConnect service using the [omniauth-yahoojp](https://github.com/mikanmarusan/omniauth-yahoojp/) gem. Runs on Docker containers.
 
-## Installing
+## Requirements
 
-Put `.env` file that be described YConnect Client ID and Secret as environmental variables. 
+- Ruby 3.3
+- Rails 7.1
+- MySQL 8.0
+- omniauth-yahoojp ~> 1.0
+
+## Setup
+
+### 1. Create `.env` file
+
+Create a `.env` file in the project root with your Yahoo Japan YConnect credentials:
 
 ```
 YAHOOJP_KEY={Your YConnect Client ID}
 YAHOOJP_SECRET={Your YConnect Secret}
 ```
 
-then, all you have to is to run below and you can access the URL `http://localhost:3000/top`.
+### 2. Build and start containers
 
-```
+```bash
 $ docker-compose build
 $ docker-compose up
 ```
 
+Access the application at `http://localhost:3000/top`.
 
-## Requirements
+## Application Flow
 
-This sample application currently works with:
+1. **Landing page** (`/top`) — Login page with Yahoo Japan OAuth link
+2. **OAuth initiation** (`/auth/yahoojp`) — Redirects to Yahoo Japan for authentication
+3. **Callback** (`/auth/yahoojp/callback`) — Displays user information retrieved from Yahoo Japan
 
-- Ruby 2.7.1
-- Rails 5.2.4.3
-- MySQL 5.7.31
+### OAuth Configuration
 
-If you'd like to change minor version,  you can change the configuration file below:
+- **Scope**: `openid profile email address`
+- **UserInfo Access**: Enabled (`userinfo_access: true`) — retrieves additional user profile information via the UserInfo API
 
-- Dockerfile
-- Gemfile
-- docker-compose.yml
+## Testing
 
+```bash
+# Run unit tests
+$ docker-compose exec rails rails test
+
+# Run system tests (Capybara + Selenium)
+$ docker-compose exec rails bundle exec rails test:system
+```
+
+## Customization
+
+If you'd like to change the Ruby, Rails, or MySQL versions, modify the following files:
+
+- `Dockerfile`
+- `Gemfile`
+- `docker-compose.yml`
