@@ -1,0 +1,10 @@
+.env
+.env-*
+.env.*
+.envrc
+.git
+.gitignore
+.plans
+tmp/mysql
+log
+node_modules
