@@ -1,7 +1,11 @@
 services:
   rails:
     build: .
-    env_file: .env
+    environment:
+      - YAHOOJP_KEY
+      - YAHOOJP_SECRET
+      - YAHOOJP_USERINFO_ACCESS
+      - RAILS_ENV=development
     container_name: rails
     depends_on:
       mysql:

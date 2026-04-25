@@ -48,11 +48,13 @@ docker-compose exec rails rails db:migrate
 - **Routes** (`config/routes.rb`): Simple routing for top and callback endpoints
 
 ### Environment Setup
-Requires `.env` file with Yahoo Japan OAuth credentials:
+Requires host shell environment variables (no `.env` file):
+```bash
+export YAHOOJP_KEY={Your YConnect Client ID}
+export YAHOOJP_SECRET={Your YConnect Secret}
+# Optional: export YAHOOJP_USERINFO_ACCESS=false  # to skip UserInfo API
 ```
-YAHOOJP_KEY={Your YConnect Client ID}
-YAHOOJP_SECRET={Your YConnect Secret}
-```
+Credentials are injected into the container via Docker Compose `environment:` passthrough.
 
 ### Dependencies
 - **Rails 7.1+** with Ruby 3.3

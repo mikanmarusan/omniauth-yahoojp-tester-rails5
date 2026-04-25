@@ -11,14 +11,16 @@ A demonstration Rails application for testing OAuth authentication with Yahoo Ja
 
 ## Setup
 
-### 1. Create `.env` file
+### 1. Set environment variables
 
-Create a `.env` file in the project root with your Yahoo Japan YConnect credentials:
+Export your Yahoo Japan YConnect credentials as shell environment variables:
 
+```bash
+export YAHOOJP_KEY={Your YConnect Client ID}
+export YAHOOJP_SECRET={Your YConnect Secret}
 ```
-YAHOOJP_KEY={Your YConnect Client ID}
-YAHOOJP_SECRET={Your YConnect Secret}
-```
+
+> **Tip**: To persist across shell sessions, add these to your `~/.zshrc` (or `~/.bashrc`), or use [direnv](https://direnv.net/) with an `.envrc` file outside the project directory.
 
 ### 2. Build and start containers
 
@@ -26,6 +28,8 @@ YAHOOJP_SECRET={Your YConnect Secret}
 $ docker-compose build
 $ docker-compose up
 ```
+
+The container will fail fast with a clear error if `YAHOOJP_KEY` or `YAHOOJP_SECRET` are not set.
 
 Access the application at `http://localhost:3000/top`.
 
@@ -38,7 +42,10 @@ Access the application at `http://localhost:3000/top`.
 ### OAuth Configuration
 
 - **Scope**: `openid profile email address`
-- **UserInfo Access**: Enabled (`userinfo_access: true`) — retrieves additional user profile information via the UserInfo API
+- **UserInfo Access**: Controlled by `YAHOOJP_USERINFO_ACCESS` environment variable (default: `true`). Set to `false` to skip UserInfo API calls:
+  ```bash
+  export YAHOOJP_USERINFO_ACCESS=false
+  ```
 
 ## Testing
 
